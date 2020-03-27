@@ -16,7 +16,7 @@ class ContactsExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: FutureBuilder(
-          future: Abc.asyncrefrestStatus(),
+          future: Abc.refrestStatus(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               return LandingPage();

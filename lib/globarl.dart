@@ -9,22 +9,29 @@ class Abc {
   static List<Contact> contacts;
   static Map<String, int> statusFlag;
   static HashSet customerSet = new HashSet();
-  static asyncrefrestStatus() async {
-     print("Hello############################");
+  static refrestStatus() async {
     var contacts =
         (await ContactsService.getContacts(withThumbnails: false)).toList();
-         print("Hello############################");
+
     var url = 'http://demo6230403.mockable.io/test';
     http.post(url, body: {'name': 'doodle', 'color': 'blue'}).then((Response res){
            var resp = json.decode(res.body);
             Abc.customerSet.addAll(resp["values"]);
         });
-         print("Hello############################");
  
-     print("Hello#########################qqq###");
    
     Abc.contacts = contacts;
-    print("Hello############################");
+
     return Abc.contacts;
+  }
+  static asyncrefrestStatus() async {
+        (ContactsService.getContacts(withThumbnails: false)).then((Iterable<Contact> contact ){
+          Abc.contacts=contact.toList();
+           var url = 'http://demo6230403.mockable.io/test';
+           http.post(url, body: {'name': 'doodle', 'color': 'blue'}).then((Response res){   
+           var resp = json.decode(res.body);
+            Abc.customerSet.addAll(resp["values"]);
+        });
+        });
   }
 }
